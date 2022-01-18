@@ -42,24 +42,24 @@ library(ggplot2)
 # 1.
 qplot(x=Depth, data=CorData, binwidth=0.5) # quick frequency plot of depth in meters to examine the variable
 
-# 2. 
+# 2.
+(BivPlot1<-ggplot(CorData, aes(x=log(mDcomp), y=log(mDcoral))) +
+    geom_point() +
+    labs(y="Focal coral mean three-dimensional diameter", 
+         x="Competitor mean three-dimensional diameter") + 
+    theme_bw())
 
-
-print(BarPlot)
-            
 # 3. 
 qplot(data=CorData, x=InvolvedPerim, y=mDcomp, colour=MorphoCoral, geom="boxplot")
 
 # 4. 
-(BarPlot<-ggplot(CorData, aes(x=log(mDcomp), y=log(InvolvedPerim))) +
+(BivPlot2<-ggplot(CorData, aes(x=log(mDcomp), y=log(InvolvedPerim))) +
   geom_point(aes(col=GenusComp, size=Depth, alpha=I(0.3))) +
-  labs(y="Perimeter involved in competition (in cm)", 
-       x="Focal coral mean three-dimensional diameter (in cm)",
+  labs(y="Perimeter involved in competition (in log(cm))", 
+       x="Competitor mean three-dimensional diameter (in log(cm))",
        colour="Competitor Genus",
-       caption = "Source: midwest") + 
+       caption =) + 
   theme_bw())
   
 # 5.
-
-
 
