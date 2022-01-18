@@ -30,12 +30,36 @@
 #of changing coral competitive performances across reef environments, 
 #Dryad, Dataset, https://doi.org/10.5061/dryad.98sf7m0kn
 
-# 1. 
+#Note - I could not figure out how to change the latitude and longitude into a format that would import into R
+# I remove them from the data set
+
+
+
+CorData<-read.csv("Data_TheWarOfCorals.csv") # import data set from project
+str(CorData) # examine structure of variables
+library(ggplot2)
+
+# 1.
+qplot(x=Depth, data=CorData, binwidth=0.5) # quick frequency plot of depth in meters to examine the variable
 
 # 2. 
 
+
+print(BarPlot)
+            
 # 3. 
+qplot(data=CorData, x=InvolvedPerim, y=mDcomp, colour=MorphoCoral, geom="boxplot")
 
 # 4. 
-
+(BarPlot<-ggplot(CorData, aes(x=log(mDcomp), y=log(InvolvedPerim))) +
+  geom_point(aes(col=GenusComp, size=Depth, alpha=I(0.3))) +
+  labs(y="Perimeter involved in competition (in cm)", 
+       x="Focal coral mean three-dimensional diameter (in cm)",
+       colour="Competitor Genus",
+       caption = "Source: midwest") + 
+  theme_bw())
+  
 # 5.
+
+
+
