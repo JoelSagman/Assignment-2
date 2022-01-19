@@ -43,23 +43,28 @@ library(ggplot2)
 qplot(x=Depth, data=CorData, binwidth=0.5) # quick frequency plot of depth in meters to examine the variable
 
 # 2.
-(BivPlot1<-ggplot(CorData, aes(x=log(mDcomp), y=log(mDcoral))) +
+(BivPlot1<-ggplot(CorData, aes(x=mDcomp, y=mDcoral)) + # bivariate plot of focal coral mean three-dimensional diameter (in cm) and ompetitor mean three-dimensional diameter (in cm)
     geom_point() +
     labs(y="Focal coral mean three-dimensional diameter", 
          x="Competitor mean three-dimensional diameter") + 
     theme_bw())
 
 # 3. 
-qplot(data=CorData, x=InvolvedPerim, y=mDcomp, colour=MorphoCoral, geom="boxplot")
+qplot(data=CorData, y=mDcomp, colour=MorphoComp, geom="boxplot") # Boxplot of focal coral mean three-dimensional diameter (in cm) by competitor morphology 
 
 # 4. 
-(BivPlot2<-ggplot(CorData, aes(x=log(mDcomp), y=log(InvolvedPerim))) +
+(BivPlot2<-ggplot(CorData, aes(x=log(mDcomp), y=log(InvolvedPerim))) + # bivariate plot of log transformed focal coral mean three-dimensional diameter (in cm) and competitor mean three-dimensional diameter (in cm) data
   geom_point(aes(col=GenusComp, size=Depth, alpha=I(0.3))) +
   labs(y="Perimeter involved in competition (in log(cm))", 
        x="Competitor mean three-dimensional diameter (in log(cm))",
-       colour="Competitor Genus",
-       caption =) + 
+       colour="Competitor Genus") + 
   theme_bw())
   
 # 5.
+(FullPlot<-ggplot(CorData, aes(x=MorphoComp, y=log(mDcomp))) + #Boxplot of log transformed competitor mean three-dimensional diameter (in cm) by Compitor morphology
+    geom_boxplot(aes(colour=I("black"), fill=MorphoComp)) +
+    labs(y="Competitor mean three-dimensional diameter (in log(cm))", 
+         x="Competitor morphology (Branching, Columnar, Encrusting, Foliaceous, Massive, Sub-branching, Tabular)",
+         fill="Competitor Mophology") +
+    theme_classic())
 
